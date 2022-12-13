@@ -8,9 +8,6 @@ export class ProductEntity {
     nameProduct: string;
 
     @Column()
-    photo: Blob;
-
-    @Column()
     stock: number;
 
     @Column()

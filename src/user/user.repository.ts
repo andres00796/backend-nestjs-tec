@@ -1,6 +1,6 @@
-import { RolEntity } from "src/rol/rol.entity";
+import { UsertypeEntity } from "src/usertypes/usertype.entity";
 import { EntityRepository, Repository } from "typeorm";
 import { UserEntity } from "./user.entity";
 
-@EntityRepository(RolEntity)
+@EntityRepository(UsertypeEntity)
 export class UserRepository extends Repository<UserEntity>{}

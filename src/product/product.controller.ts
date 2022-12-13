@@ -19,12 +19,6 @@ export class ProductController {
         return this.product_service.create(entity);
     }
 
-
-    @Get(':id')
-    findOne(@Param('id',ParseIntPipe) id: number) {
-        return this.product_service.findOne(+id);
-    }
-
     @Patch(':id')
     update(@Param('id',ParseIntPipe) id: number, @Body() entity: CreateProductdto) {
         return this.product_service.update(id, entity);

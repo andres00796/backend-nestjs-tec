@@ -1,5 +1,5 @@
 import { hash } from "bcryptjs";
-import { RolEntity } from "src/rol/rol.entity";
+import { UsertypeEntity } from "src/usertypes/usertype.entity";
 import { BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 
@@ -8,13 +8,8 @@ export class UserEntity {
     @PrimaryGeneratedColumn()
     id_user: number;
 
-    @Column()
-    username: string;
 
-    @Column()
-    password: string;
-
-    @ManyToOne(() => RolEntity, (rol) => rol.id_rol)
+    @ManyToOne(() => UsertypeEntity, (rol) => rol.idUserType)
 /*
     @ManyToMany(() => RolEntity, rol => rol.users,{eager: true})
     @JoinTable({
@@ -23,7 +18,19 @@ export class UserEntity {
         inverseJoinColumn: {name:'id_rol'}
     })
     */
-    rol: RolEntity[];
+    idUserType: UsertypeEntity[];
+
+    @Column()
+    username: string;
+
+    @Column()
+    password: string;
+
+    @Column()
+    firstname: string;
+
+    @Column()
+    lastname: string;
 
     @BeforeUpdate()
     @BeforeInsert()

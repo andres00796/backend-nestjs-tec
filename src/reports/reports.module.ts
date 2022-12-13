@@ -1,5 +1,5 @@
-import { SellerController } from './seller.controller';
-import { SellerService } from './seller.service';
+import { ReportsController } from './reports.controller';
+import { ReportsService } from './reports.service';
 /*
 https://docs.nestjs.com/modules
 */
@@ -9,8 +9,8 @@ import { Module } from '@nestjs/common';
 @Module({
     imports: [],
     controllers: [
-        SellerController,],
+        ReportsController,],
     providers: [
-        SellerService,],
+        ReportsService,],
 })
 export class SellerModule { }

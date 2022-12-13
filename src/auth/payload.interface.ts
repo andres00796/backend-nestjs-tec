@@ -1,7 +1,7 @@
 export interface PayloadInterface {
 
     id:number;
-    name:string;
-    rols:string [];
+    username:string;
+    rol:string [];
 
 }

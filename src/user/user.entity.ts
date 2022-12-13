@@ -1,7 +1,6 @@
 import { hash } from "bcryptjs";
-import { ContactEntity } from "src/contact/contact.entity";
 import { RolEntity } from "src/rol/rol.entity";
-import { BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity({name:'user'})
@@ -10,21 +9,21 @@ export class UserEntity {
     id_user: number;
 
     @Column()
-    name: string;
+    username: string;
 
     @Column()
     password: string;
 
-    @OneToMany(() => ContactEntity, (contact) => contact.user)
-    contact: ContactEntity[];
-
+    @ManyToOne(() => RolEntity, (rol) => rol.id_rol)
+/*
     @ManyToMany(() => RolEntity, rol => rol.users,{eager: true})
     @JoinTable({
         name:'user_rol',
         joinColumn: {name: 'id_user'},
         inverseJoinColumn: {name:'id_rol'}
     })
-    rols: RolEntity[];
+    */
+    rol: RolEntity[];
 
     @BeforeUpdate()
     @BeforeInsert()

@@ -14,9 +14,9 @@ export class ContactEntity {
 
     @Column()
     relationship: string;
-
+/*
      @ManyToOne(() => UserEntity, (user) => user.contact)
      @JoinColumn({name: 'id_user'})
      user: UserEntity;
-
+*/
 }

@@ -19,17 +19,17 @@ export class UserController {
     getAll(){
         return this.user_service.getAll();
     }
-
+/*
     @Post()
     create(@Body() dto: UserDto){
         return this.user_service.create(dto);
     }
-
+*/
     @RolDecorator(RolName.ADMIN,RolName.USER)
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Get(':id_user')
     async getAllById(@Param('id_user') id_user){
-        return await this.user_service.getAllContactById(id_user);
+        //return await this.user_service.getAllContactById(id_user);
     }
     
     @RolDecorator(RolName.ADMIN)

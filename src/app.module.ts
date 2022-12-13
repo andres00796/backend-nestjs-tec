@@ -1,3 +1,4 @@
+import { SellerModule } from './seller/seller.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
@@ -14,27 +15,28 @@ import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
+    SellerModule,
     ConfigModule.forRoot({
       envFilePath: '.env',
-      isGlobal:true
+      isGlobal: true
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
       port: 3306,
-      username: 'nest',
-      password: 'admin',
+      username: 'root',
+      password: '',
       database: 'nestjs_angular',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    ContactModule,
+    //ContactModule,
     UserModule,
     RolModule,
     AuthModule,
-      
+
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

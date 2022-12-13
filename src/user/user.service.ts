@@ -22,17 +22,19 @@ export class UserService {
          if(!users.length)throw new NotFoundException('no hay usuarios');
          return users;
      }
+     /*
     async create(dto: UserDto): Promise<any>{
-        const exists = await this.user_repository.findOne({where: {name: dto.name}});
+        const exists = await this.user_repository.findOne({where: {name: dto.username}});
         if(exists)throw new BadRequestException( 'ese usuario ya existe');
         const rol =await this.rol_repository.findOne({where: {name: RolName.ADMIN}}) ;
         const user=new UserEntity();
-        user.name=dto.name;
+        user.username=dto.username;
         user.password=dto.password;
-        user.rols=[rol] ;
+        user.rol=[rol] ;
         return  await this.user_repository.save(user);
     }
-
+    */
+/*
     async findById(id:number) :Promise<UserEntity>{
         const contact=await this.user_repository.findOne(id);
         if(!contact){
@@ -40,17 +42,18 @@ export class UserService {
         }
         return contact;
     }
-
+*/
+/*
     async getAllContactById(id: number): Promise<UserEntity>{
         return await this.user_repository.findOne(id,{relations:['contact']} );
     }
-
+*/
     async deleteUser(id_user: number): Promise<any>{
      return await this.user_repository.delete(id_user);
     }
-
+/*
     async getContactUser(id_user:number): Promise<UserEntity[]>{
         return await this.user_repository.find({where: {id_user:id_user}})
     }
-
+*/
 }

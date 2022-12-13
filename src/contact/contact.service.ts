@@ -26,10 +26,10 @@ export class ContactService {
          contact.name = new_contact.name;
          contact.phone = new_contact.phone;
          contact.relationship = new_contact.relationship;
-         contact.user = user;
+         //contact.user = user;
          return this.contact_repository.manager.save(contact);
      }
- 
+ /*
      async updateContact(id_contact: number, contact_update: ContactDto): Promise<ContactEntity>{
          
          const contact = await this.contact_repository.findOne(id_contact);
@@ -37,8 +37,9 @@ export class ContactService {
          contact.phone = contact_update.phone;
          contact.relationship=contact_update.relationship;
          return await this.contact_repository.save(contact);
+         
      }
- 
+ */
      async deleteContact(id_contact: number): Promise<any>{
          return await this.contact_repository.delete(id_contact);
      }
@@ -51,7 +52,7 @@ export class ContactService {
          .where("id_user = :id_user", {id_user:id_user})
          .execute();
      }
-
+/*
      async findById(id:number) :Promise<ContactEntity>{
          const contact=await this.contact_repository.findOne(id);
          if(!contact){
@@ -59,14 +60,16 @@ export class ContactService {
          }
          return contact;
      }
-
+     */
+/*
      async findByName(name_product: string):Promise <ContactEntity>{
          const contact= await this.contact_repository.findOne({name: name_product});
          return contact;
      }
-
+*/
+/*
     async getContactUser(id:number): Promise<ContactEntity[]>{
         return await this.contact_repository.find({where: {user:id}})
     }
-
+*/
 }

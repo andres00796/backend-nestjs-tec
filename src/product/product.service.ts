@@ -18,16 +18,14 @@ export class ProductService {
           this.product_repository.create(product)
         );
     }
-    findOne(idProduct: number): Promise<ProductEntity> {
-        return this.product_repository.findOneBy({ idProduct });
-    }
+
+
     update(idProduct: number, data: CreateProductdto): Promise<any> {
         return this.product_repository
         .createQueryBuilder()
         .update()
         .set({
           nameProduct: data.nameProduct,
-          photo: data.photo,
           stock: data.stock,
           price:data.price,
           state:data.state

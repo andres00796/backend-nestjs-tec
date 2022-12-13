@@ -33,7 +33,7 @@ export class ContactController {
             response.status(HttpStatus.FORBIDDEN).json({mensaje:'error al obtener lista de los usuarios'});
         })
     }
-
+/*
     @RolDecorator(RolName.ADMIN)
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Put(':id_contact')
@@ -44,7 +44,7 @@ export class ContactController {
             response.status(HttpStatus.FORBIDDEN).json({mensaje:'error en la actualizacion de usuario'});
         });
     }
-
+*/
     @RolDecorator(RolName.ADMIN)
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Delete(':id_contact')
@@ -55,19 +55,20 @@ export class ContactController {
             response.status(HttpStatus.FORBIDDEN).json({mensaje:'error en la eliminacion usuario'});
         });
     }
-
+/*
     @RolDecorator(RolName.ADMIN,RolName.USER)
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Get(':id_contact')
     async getById(@Param('id_contact') id_contact){
         return await this.contact_service.findById(id_contact);
     }
-
+*/
+/*
      @RolDecorator(RolName.ADMIN,RolName.USER)
      @UseGuards(JwtAuthGuard, RolesGuard)
      @Get(':id/:ids')
      async getAllById(@Param('id') id_contact){
          return await this.contact_service.getContactUser(id_contact);
      }
-
+*/
 }

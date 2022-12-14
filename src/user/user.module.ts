@@ -7,12 +7,26 @@ import { UserEntity } from './user.entity';
 import { ContactService } from 'src/contact/contact.service';
 import { ContactEntity } from 'src/contact/contact.entity';
 import { ContactRepository } from 'src/contact/producto.repository';
+import { ProductEntity } from 'src/product/product.entity';
+import { ProductRepository } from 'src/product/product.repository';
+import { ProductService } from 'src/product/product.service';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([RolEntity,UserEntity,ContactEntity, ContactRepository])
+    TypeOrmModule.forFeature([
+      RolEntity,
+      UserEntity,
+      ContactEntity, 
+      ContactRepository, 
+      ProductEntity,
+      ProductRepository
+      ])
   ],
-  providers: [UserService,ContactService],
+  providers: [
+    UserService,
+    ContactService,
+    ProductService
+  ],
   controllers: [UserController]
 })
 export class UserModule {}

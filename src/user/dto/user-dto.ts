@@ -9,4 +9,15 @@ export class UserDto {
 
     @IsNotBlank({message:'la contraseña no puede ir vacia'})
     readonly password: string;
+
+    @IsNotBlank({message:'el nombre no puede ir vacio'})
+    readonly firstName: string;
+
+    @IsNotBlank({message:'el apellido no puede ir vacio'})
+    readonly lastName: string;
+
+
+    readonly state: number;
+
+    readonly idRol: number;
 }

@@ -11,6 +11,7 @@ import { RolModule } from './rol/rol.module';
 import { AuthService } from './auth/auth.service';
 import { AuthController } from './auth/auth.controller';
 import { AuthModule } from './auth/auth.module';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
@@ -24,7 +25,7 @@ import { AuthModule } from './auth/auth.module';
       port: 3306,
       username: 'nest',
       password: 'admin',
-      database: 'nestjs_angular',
+      database: 'nestjs_ionic',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
@@ -32,6 +33,7 @@ import { AuthModule } from './auth/auth.module';
     UserModule,
     RolModule,
     AuthModule,
+    ProductModule,
       
   ],
   controllers: [AppController],

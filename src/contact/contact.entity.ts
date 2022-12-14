@@ -6,17 +6,17 @@ export class ContactEntity {
     @PrimaryGeneratedColumn()
     id_contact: number;
 
-    @Column()
-    name: string;
+    // @Column()
+    // name: string;
 
-    @Column()
-    phone: string;
+    // @Column()
+    // phone: string;
 
-    @Column()
-    relationship: string;
+    // @Column()
+    // relationship: string;
 
-     @ManyToOne(() => UserEntity, (user) => user.contact)
-     @JoinColumn({name: 'id_user'})
-     user: UserEntity;
+    //  @ManyToOne(() => UserEntity, (user) => user.contact)
+    //  @JoinColumn({name: 'id_user'})
+    //  user: UserEntity;
 
 }

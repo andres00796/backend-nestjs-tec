@@ -5,12 +5,13 @@ import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "t
 
 @Entity({name:'rol'})
 export class RolEntity {
+    
     @PrimaryGeneratedColumn()
-    id_rol: number;
+    idRol: number;
 
     @Column()
     name: string;
 
-    @ManyToMany(() => UserEntity, (user) => user.rols)
-    users: UserEntity[];
+    @OneToMany(() => UserEntity, (user) => user.rol)
+    user: UserEntity[];
 }

@@ -10,16 +10,20 @@ import { LoginDto } from './dto/login-dto';
 import { NewUserDto } from './dto/new-user-dto';
 import { PayloadInterface } from './payload.interface';
 import { JwtService } from '@nestjs/jwt';
+import { Connection } from 'typeorm';
+import { use } from 'passport';
 
 @Injectable()
 export class AuthService {
 
+    nameRol:string="";
     constructor(
         @InjectRepository(RolEntity)
         private readonly rol_repository: RolRepository,
         @InjectRepository(UserEntity)
         private readonly auth_repository:AuthRepository,
-        private readonly jwt_service: JwtService
+        private readonly jwt_service: JwtService,
+        private readonly connection: Connection, 
     ){}
 
     async getAll():Promise<UserEntity[]>{
@@ -35,22 +39,46 @@ export class AuthService {
         const user=new UserEntity();
         user.name=dto.name;
         user.password=dto.password;
-        user.rols=[rol] ;
+        user.rol=rol ;
         return  await this.auth_repository.save(user);
     }
 
     async login(dto: LoginDto):Promise<any>{
         const {name} = dto;
         const user = await this.auth_repository.findOne({where: {name: name} });
+        let nameRol = await this.datesUser(user.id_user);
         if(!user)return new UnauthorizedException('no existe');
-        const pass=await compare(dto.password, user.password);
+        const pass = await compare(dto.password, user.password);
         if(!pass)return new UnauthorizedException('contraseña incorrecta');
         const payload: PayloadInterface={
             id: user.id_user,
             name: user.name,
-            rols: user.rols.map(rol =>rol.name as RolName)
+            rol: nameRol
         }
         const token= await this.jwt_service.sign(payload);
         return {token}
+    }
+
+
+    async datesUser(id_user:number):Promise<any>{
+        const queryRunner = this.connection.createQueryRunner();
+        await queryRunner.startTransaction();
+        try{
+            let sql=`SELECT R.name AS NAME
+            FROM user U
+            INNER JOIN rol R ON R.idRol = U.idRol
+            WHERE U.id_user = ${id_user}
+            `
+            let myquery=await queryRunner.manager.query(sql);
+            await queryRunner.commitTransaction()
+            for (let name of myquery)
+            {
+                this.nameRol = name.NAME
+            }
+        }
+        finally {
+            await queryRunner.release();
+        }
+        return this.nameRol;
     }
 }

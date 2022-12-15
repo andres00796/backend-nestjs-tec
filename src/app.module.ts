@@ -30,7 +30,7 @@ import { FileModule } from './files/file/file.module';
       password: 'dba_user',
       database: 'ecommerce_db',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: false,
+      synchronize: true,
     }),
     ContactModule,
     UserModule,

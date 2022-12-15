@@ -46,8 +46,8 @@ export class UserService {
         return contact;
     }
 
-    async getAllContactById(id: number): Promise<UserEntity>{
-        return await this.user_repository.findOne(id,{relations:['contact']} );
+    async getAllUserById(id_user: number): Promise<UserEntity>{
+        return await this.user_repository.findOne(id_user);
     }
 
     async deleteUser(id_user: number): Promise<any>{

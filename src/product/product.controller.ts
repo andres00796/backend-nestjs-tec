@@ -1,4 +1,4 @@
-import { Body, ConsoleLogger, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res, UseGuards } from '@nestjs/common';
+import { Body, ConsoleLogger, Controller, Delete,Request, Get, HttpStatus, Param, Post, Put, Res, UseGuards } from '@nestjs/common';
 import { GetPrincipal } from 'src/decorators/get-principal.decorator';
 import { RolDecorator } from 'src/decorators/rol.decorator';
 import { JwtAuthGuard } from 'src/guard/jwt.guard';
@@ -7,6 +7,8 @@ import { RolesGuard } from 'src/guard/rol.guard';
 import { ProductDto } from './dto/product-dto';
 import { ProductService } from './product.service';
 import { response } from 'express';
+import { Patch, Query } from '@nestjs/common/decorators';
+//import { View } from 'typeorm/schema-builder/view/View';
 
 @Controller('product')
 export class ProductController {
@@ -33,7 +35,7 @@ export class ProductController {
     
 
     //@RolDecorator(RolName.ADMIN,RolName.USER)
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    //@UseGuards(JwtAuthGuard, RolesGuard)
     @Get()
     getAll(@Res() response, @GetPrincipal() user:any){
         this.product_service.getAllProduct().then(mensajesList=>{
@@ -42,6 +44,7 @@ export class ProductController {
             response.status(HttpStatus.FORBIDDEN).json({mensaje:'error al obtener lista de los usuarios'});
         })
     }
+
 
     //@RolDecorator(RolName.ADMIN)
     @UseGuards(JwtAuthGuard, RolesGuard)
@@ -66,11 +69,20 @@ export class ProductController {
     }
 
     //@RolDecorator(RolName.ADMIN,RolName.USER)
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    //@UseGuards(JwtAuthGuard, RolesGuard)
     @Get(':idProduct')
     async getById(@Param('idProduct') idProduct){
         return await this.product_service.findById(idProduct);
     }
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Get('/forsearch/products')
+    async getByName(@Query() search:ProductDto,@Request() response:any){
+       const {nameProduct}=search
+        console.log(nameProduct)
+        console.log(response)
+        return await this.product_service.findByName(search);
+    }
+
 
      //@RolDecorator(RolName.ADMIN,RolName.USER)
      @UseGuards(JwtAuthGuard, RolesGuard)
@@ -78,6 +90,11 @@ export class ProductController {
      async getAllById(@Param('id') idProduct){
          return await this.product_service.getProductUser(idProduct);
      }
+
+
+  
+ 
+
 
 
 

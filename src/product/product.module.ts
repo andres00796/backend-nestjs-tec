@@ -9,6 +9,7 @@ import { UserRepository } from 'src/user/user.repository';
 import { UserEntity } from 'src/user/user.entity';
 import { ProductEntity } from './product.entity';
 import { UserService } from 'src/user/user.service';
+import { FileService } from 'src/files/file/file.service';
 
 @Module({
   imports:[

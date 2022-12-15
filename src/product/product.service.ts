@@ -26,10 +26,6 @@ export class ProductService {
      async createProduct(id_user:number, new_product: ProductDto): Promise<ProductEntity>{
          const user = await this.user_repository.findOne({where: {id_user: id_user }}) ;
          const product = new ProductEntity();
-         console.log("create")
-         console.log(user);
-         console.log(product)
-         console.log("product")
          product.nameProduct = new_product.nameProduct;
          product.stock = new_product.stock;
          product.price = new_product.price;
@@ -69,9 +65,10 @@ export class ProductService {
          return contact;
      }
 
-     async findByName(name_product: string):Promise <ProductEntity>{
-         const contact= await this.product_repository.findOne({nameProduct: name_product});
-         return contact;
+     async findByName(nameProduct: ProductDto):Promise <ProductEntity>{
+        console.log(nameProduct)
+         const product = await this.product_repository.findOne({nameProduct: nameProduct.nameProduct});
+         return product;
      }
 
     async getProductUser(id:number): Promise<ProductEntity[]>{
@@ -92,5 +89,22 @@ export class ProductService {
             await queryRunner.release();
         }
     }
+
+    async searchProduct(nameProduct: string){
+        const queryRunner = this.connection.createQueryRunner();
+        await queryRunner.startTransaction();
+        try{
+            let sql=`SELECT * products
+            FROM state = 0
+            WHERE idProduct = ${nameProduct}`
+            let myquery=await queryRunner.manager.query(sql);
+            await queryRunner.commitTransaction()
+        }
+        finally {
+            await queryRunner.release();
+        }
+    }
+
+
 
 }

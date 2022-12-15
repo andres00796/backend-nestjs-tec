@@ -12,6 +12,9 @@ import { AuthService } from './auth/auth.service';
 import { AuthController } from './auth/auth.controller';
 import { AuthModule } from './auth/auth.module';
 import { ProductModule } from './product/product.module';
+import { ReportModule } from './report/report.module';
+import { OrderModule } from './order/order.module';
+import { FileModule } from './files/file/file.module';
 
 @Module({
   imports: [
@@ -27,13 +30,16 @@ import { ProductModule } from './product/product.module';
       password: 'admin',
       database: 'nestjs_ionic',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
+      synchronize: false,
     }),
     ContactModule,
     UserModule,
     RolModule,
     AuthModule,
     ProductModule,
+    ReportModule,
+    OrderModule,
+    FileModule,
       
   ],
   controllers: [AppController],

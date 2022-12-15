@@ -10,6 +10,7 @@ import { ContactRepository } from 'src/contact/producto.repository';
 import { ProductEntity } from 'src/product/product.entity';
 import { ProductRepository } from 'src/product/product.repository';
 import { ProductService } from 'src/product/product.service';
+import { FileService } from 'src/files/file/file.service';
 
 @Module({
   imports: [
@@ -19,13 +20,15 @@ import { ProductService } from 'src/product/product.service';
       ContactEntity, 
       ContactRepository, 
       ProductEntity,
-      ProductRepository
+      
+      
       ])
   ],
   providers: [
     UserService,
     ContactService,
-    ProductService
+    ProductService,
+    
   ],
   controllers: [UserController]
 })

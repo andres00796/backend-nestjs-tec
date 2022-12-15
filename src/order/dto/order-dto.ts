@@ -1,7 +1,8 @@
 import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 import { IsNotBlank } from "src/decorators/is-not-blank.decorator";
+import { ProductDto } from "src/product/dto/product-dto";
 
-export class ProductDto {
+export class OrderDto {
 
     @IsString()
     @IsNotEmpty()
@@ -11,22 +12,17 @@ export class ProductDto {
     @IsNumber()
     @IsNotEmpty()
     @IsNotBlank()
-    readonly stock: number;
-
-    @IsNumber()
-    @IsNotEmpty()
-    @IsNotBlank()
-    readonly price: number;
+    readonly totalCost: number;
 
     @IsNumber()
     @IsNotEmpty()
     @IsNotBlank()
     readonly state: number;
+    readonly date: string;
 
     readonly id_user:number;
 
-    readonly idProduct:number;
+    readonly products:ProductDto[];
 
-    
     
 }

@@ -32,7 +32,7 @@ export class UserController {
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Get(':id_user')
     async getAllById(@Param('id_user') id_user){
-        return await this.user_service.getAllContactById(id_user);
+        return await this.user_service.getAllUserById(id_user);
     }
     
     //@RolDecorator(RolName.ADMIN)
